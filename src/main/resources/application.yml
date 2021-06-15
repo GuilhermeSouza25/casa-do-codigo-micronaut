@@ -1,0 +1,13 @@
+micronaut:
+  application:
+    name: casaDoCodigoMicronaut
+datasources:
+  default:
+    url: jdbc:mysql://localhost:3306/casa_do_codigo_micronaut?serverTimezone=America/Sao_Paulo
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: guuuih25
+    schema-generate: CREATE_DROP
+    dialect: MYSQL
+jpa.default.properties.hibernate.hbm2ddl.auto: update
+jpa.default.properties.hibernate.hbm2ddl.show_sql: true
