@@ -1,4 +1,33 @@
+#datasources:
+#  default:
+#    url: jdbc:tc:mysql:8:///db
+#    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+
+micronaut:
+  application:
+    name: casaDoCodigoMicronaut
 datasources:
   default:
-    url: jdbc:tc:mysql:8:///db
-    driverClassName: org.testcontainers.jdbc.ContainerDatabaseDriver
+    url: jdbc:mysql://localhost:3306/casa_do_codigo_micronaut_test?serverTimezone=America/Sao_Paulo
+    driverClassName: com.mysql.cj.jdbc.Driver
+    username: root
+    password: guuuih25
+    schema-generate: CREATE_DROP
+    dialect: MYSQL
+
+spring:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+
+logger.levels.io.micronaut.transaction: DEBUG
+
+jpa:
+  default:
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+        show_sql: true

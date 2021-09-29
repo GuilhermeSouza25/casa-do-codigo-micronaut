@@ -7,17 +7,18 @@ plugins {
     id("org.jetbrains.kotlin.plugin.jpa") version "1.4.32"
 }
 
-allOpen{
+allOpen {
     annotations(
         "javax.inject.Singleton",
         "javax.transaction.Transactional",
-        "io.micronaut.http.annotation.Controller")
+        "io.micronaut.http.annotation.Controller"
+    )
 }
 
 version = "0.1"
 group = "br.com.zupacademy"
 
-val kotlinVersion=project.properties.get("kotlinVersion")
+val kotlinVersion = project.properties.get("kotlinVersion")
 repositories {
     mavenCentral()
 }
@@ -43,9 +44,18 @@ dependencies {
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
     runtimeOnly("ch.qos.logback:logback-classic")
     runtimeOnly("mysql:mysql-connector-java")
-    testImplementation("org.testcontainers:junit-jupiter")
-    testImplementation("org.testcontainers:mysql")
-    testImplementation("org.testcontainers:testcontainers")
+
+    testAnnotationProcessor("io.micronaut:micronaut-inject-java")
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testImplementation("org.mockito:mockito-core:3.8.0")
+    testImplementation("io.micronaut.test:micronaut-test-junit5:2.3.7")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.7.1")
+    //testRuntimeOnly("mysql:mysql-connector-java")
+    tasks.test { useJUnitPlatform() }
+//    testImplementation("org.testcontainers:junit-jupiter")
+//    testImplementation("org.testcontainers:mysql")
+//    testImplementation("org.testcontainers:testcontainers")
+
 
     implementation("io.micronaut:micronaut-validation")
     implementation("io.micronaut.beanvalidation:micronaut-hibernate-validator:3.0.0")

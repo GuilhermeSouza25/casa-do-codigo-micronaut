@@ -38,11 +38,11 @@ class LivroRequest(
     val dataPublicacao: LocalDate,
 
     @field:NotNull @field:Min(value = 1)
-    @ExistisId(domainClass = Categoria::class, fieldName = "id")
+    @field:ExistisId(domainClass = Categoria::class, fieldName = "id")
     val categoriaId: Long,
 
     @field:NotNull @field:Min(value = 1)
-    @ExistisId(domainClass = Autor::class, fieldName = "id")
+    @field:ExistisId(domainClass = Autor::class, fieldName = "id")
     val autorId: Long
 ) {
     fun toModel(manager: EntityManager): Livro {

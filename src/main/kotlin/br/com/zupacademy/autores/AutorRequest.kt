@@ -1,6 +1,5 @@
 package br.com.zupacademy.autores
 
-import br.com.zupacademy.shared.EnderecoResponse
 import br.com.zupacademy.validators.UniqueValue
 import io.micronaut.core.annotation.Introspected
 import javax.validation.constraints.Email
@@ -10,6 +9,7 @@ import javax.validation.constraints.Size
 
 @Introspected
 data class  AutorRequest(
+
     @field:NotBlank
     val nome: String,
 
@@ -24,11 +24,11 @@ data class  AutorRequest(
     val cep: String,
 ) {
 
-    fun toModel(enderecoResponse: EnderecoResponse?): Autor {
+    fun toModel(enderecoResponse: EnderecoClientResponse?): Autor {
 
-        val enderecoAutor = EnderecoAutor(enderecoResponse)
+        val endereco = enderecoResponse?.toModel()
 
-        return Autor(nome, email, descricao, enderecoAutor)
+        return Autor(nome, email, descricao, endereco)
     }
 
 }

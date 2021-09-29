@@ -1,7 +1,6 @@
 package br.com.zupacademy.autores
 
-import java.text.SimpleDateFormat
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import javax.persistence.*
 
@@ -10,7 +9,7 @@ class Autor(
     nome: String,
     email: String,
     descricao: String,
-    @field:Embedded val endereco: EnderecoAutor
+    @field:Embedded val endereco: EnderecoAutor?
 ) {
 
     var nome: String = nome
@@ -20,7 +19,7 @@ class Autor(
     var descricao: String = descricao
         private set
 
-    val criadoEm: LocalDateTime = LocalDateTime.now()
+    val criadoEm: LocalDate = LocalDate.now()
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

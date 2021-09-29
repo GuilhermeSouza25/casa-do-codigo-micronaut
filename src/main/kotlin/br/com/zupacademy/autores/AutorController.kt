@@ -47,16 +47,16 @@ class AutorController(
 
     @Get()
     fun listar(@QueryValue email: Optional<String>): HttpResponse<Any> {
-
+        println("chamou controler")
         when {
             email.isPresent -> {
                 val possivelAutor = repository.findByEmail(email.get())
                 if (possivelAutor.isEmpty) return HttpResponse.notFound()
-                return HttpResponse.ok(AutorResponse(possivelAutor.get()))
+                return HttpResponse.ok(AutorDetalheResponse(possivelAutor.get()))
             }
             else -> {
                 val autores: List<Autor> = repository.findAll()
-                val response = autores.map { autor -> AutorResponse(autor) }
+                val response = autores.map { autor -> AutorListaResponse(autor) }
                 return HttpResponse.ok(response)
             }
 
@@ -78,7 +78,7 @@ class AutorController(
         autor.atualiza(request)
         repository.update(autor)
 
-        return HttpResponse.ok(AutorResponse(autor))
+        return HttpResponse.ok(AutorListaResponse(autor))
     }
 
     @Delete("/{id}")

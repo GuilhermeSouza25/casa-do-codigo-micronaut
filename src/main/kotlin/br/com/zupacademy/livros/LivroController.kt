@@ -26,10 +26,9 @@ class LivroController(
     @Transactional
     fun cadastra(@Body @Valid request: LivroRequest): HttpResponse<Any> {
 
-        println(request.sumario)
         val livro = request.toModel(manager)
 
-        manager.persist(livro)
+        repository.save(livro)
 
         return HttpResponse.status(HttpStatus.CREATED)
     }
@@ -43,8 +42,8 @@ class LivroController(
         val livros = if (titulo.isEmpty) repository.findAll(paginacao)
         else repository.buscaPorTitulo("%${titulo.get()}%", paginacao)
 
-        titulo.ifPresentOrElse({repository.findAll()},
-            {repository.findAll(paginacao)})
+//        titulo.ifPresentOrElse({repository.findAll()},
+//            {repository.findAll(paginacao)})
 
         return HttpResponse.ok(livros.map { livro -> LivroListaResponse(livro) })
     }
@@ -64,7 +63,7 @@ class Paginacao(
     @field:QueryValue val tamanho: Int,
 ) : Pageable {
 
-    val sort: String = "dataPublicacao"
+    var sort = "dataPublicacao"
 
     override fun getNumber(): Int {
         return pagina

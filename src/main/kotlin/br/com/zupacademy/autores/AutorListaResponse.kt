@@ -1,7 +1,7 @@
 package br.com.zupacademy.autores
 
 
-class AutorResponse(autor: Autor) {
+class AutorListaResponse(autor: Autor) {
 
     val nome = autor.nome
     val email = autor.email

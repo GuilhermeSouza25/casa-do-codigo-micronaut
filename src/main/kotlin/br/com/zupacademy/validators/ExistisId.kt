@@ -45,6 +45,8 @@ class ExistisIdValidator : ConstraintValidator<ExistisId, Long> {
         @NonNull context: ConstraintValidatorContext
     ): Boolean {
 
+        println("validador de id")
+
         if (value == null) return true
 
         val resultList = manager
